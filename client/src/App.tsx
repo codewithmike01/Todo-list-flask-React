@@ -15,7 +15,10 @@ function App() {
   const [todoItem, setTodoItem] = useState<string>('');
   const [todoList, setTodoList] = useState<ITodoList[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [editTodo, setEditTodo] = useState(false);
+  const [editTodoItem, setEditTodoItem] = useState<{ id: string; val: string }>(
+    { id: '', val: '' }
+  );
   // const [data, error, loading] = useGetTodo();
 
   // Fetch data on render
@@ -50,6 +53,36 @@ function App() {
       .then((res) => {
         setTodoList(res?.data?.data);
         setLoading(false);
+        setTodoItem('');
+      })
+      .catch((err) => {
+        setLoading(false);
+      });
+  };
+
+  // Delete Todo Item
+  const deleteTodoItem = async (todoId: string) => {
+    await axios
+      .delete(`${baseUrl}todos/${todoId}`)
+      .then((res) => {
+        setTodoList(res?.data?.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+      });
+  };
+
+  const updateTodo = async (todoId: string) => {
+    const data = {
+      todo: editTodoItem?.val,
+    };
+
+    await axios
+      .put(`${baseUrl}todos/${todoId}`, data)
+      .then((res) => {
+        setTodoList(res?.data?.data);
+        setLoading(false);
       })
       .catch((err) => {
         setLoading(false);
@@ -78,7 +111,49 @@ function App() {
           {loading ? (
             <p>Loading ....</p>
           ) : (
-            todoList.map((todoItem) => <div>{todoItem?.todo}</div>)
+            todoList.map((todoItemVal) => (
+              <div key={todoItemVal?.id}>
+                {editTodo && todoItemVal?.id === editTodoItem?.id ? (
+                  <input
+                    type="text"
+                    value={editTodoItem?.val}
+                    onChange={(e) =>
+                      setEditTodoItem({
+                        ...editTodoItem,
+                        val: e.target.value,
+                      })
+                    }
+                    contentEditable={editTodo}
+                  />
+                ) : (
+                  <p>{todoItemVal?.todo}</p>
+                )}
+
+                <div>
+                  <button onClick={() => deleteTodoItem(todoItemVal?.id)}>
+                    Delete
+                  </button>
+                  <button
+                    onClick={() => {
+                      if (editTodo) {
+                        updateTodo(editTodoItem?.id);
+                        setEditTodo(false);
+                      } else {
+                        setEditTodo(true);
+                        setEditTodoItem({
+                          val: todoItemVal?.todo,
+                          id: todoItemVal?.id,
+                        });
+                      }
+                    }}
+                  >
+                    {editTodo && todoItemVal?.id === editTodoItem?.id
+                      ? 'Save'
+                      : ' Edit'}
+                  </button>
+                </div>
+              </div>
+            ))
           )}
         </div>
       </section>
