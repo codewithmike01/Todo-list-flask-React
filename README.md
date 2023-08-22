@@ -24,7 +24,6 @@ In the project directory,in your terminal, you can run:
 
 ```cmd
   cd client
-
 ```
 
 ```cmd
