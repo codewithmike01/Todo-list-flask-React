@@ -30,6 +30,10 @@ In the project directory,in your terminal, you can run:
  npm i
 ```
 
+```cmd
+ npm start
+```
+
 <br>
 In the project directory, you can run:
 
@@ -42,7 +46,15 @@ In the project directory, you can run:
 ### Backend setup (Coming soon)
 
 ```cmd
-  cd server
+  cd server/venv
+```
+
+```cmd
+cd pip install -r requirements.txt
+```
+
+```cmd
+FLASK_APP=app.py FLASK_DEBUG=1 flask run
 ```
 
 <br>
