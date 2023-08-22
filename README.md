@@ -1,6 +1,10 @@
 # Flask TodoList
 
-This project showcases my MVP projects on a portfolio built with typescript
+This project showcases Todo list with Reactjs , typescript and python flask
+
+## Video preview
+
+https://github.com/Ginohmk/Todo-list-flask-React/assets/58771507/54c7fc9e-c63a-4662-b371-dc0118b86864
 
 ## Live Link (Not avialable yet)
 
@@ -43,7 +47,7 @@ In the project directory, you can run:
 
 <br>
 
-### Backend setup (Coming soon)
+### Backend setup
 
 ```cmd
   cd server/venv
