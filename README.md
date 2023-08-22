@@ -41,6 +41,10 @@ In the project directory, you can run:
 
 ### Backend setup (Coming soon)
 
+```cmd
+  cd server
+```
+
 <br>
 
 👤 **Kanu Mike**
