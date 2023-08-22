@@ -1,4 +1,4 @@
-# Portfolio Version 2
+# Flask TodoList
 
 This project showcases my MVP projects on a portfolio built with typescript
 
